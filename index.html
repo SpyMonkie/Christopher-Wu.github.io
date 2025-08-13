@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Christopher Wu - Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    section {
+      padding: 60px 0;
+    }
+    .project-card {
+      transition: transform 0.2s;
+    }
+    .project-card:hover {
+      transform: scale(1.03);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">Christopher Wu</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#robotics">Robotics</a></li>
+        <li class="nav-item"><a class="nav-link" href="#graphics">Graphics/Gaming</a></li>
+        <li class="nav-item"><a class="nav-link" href="#ml">NN / ML</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="bg-primary text-white text-center" style="padding:120px 0;">
+  <div class="container">
+    <h1>Hi, I'm Christopher Wu</h1>
+    <p class="lead">Robotics Engineer • Game Developer • AI Enthusiast</p>
+  </div>
+</header>
+
+<!-- Robotics Section -->
+<section id="robotics">
+  <div class="container">
+    <h2 class="text-center">Robotics Projects</h2>
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <div class="card project-card">
+          <img src="robotics1.jpg" class="card-img-top" alt="Project 1">
+          <div class="card-body">
+            <h5 class="card-title">Astromech Droid Controller</h5>
+            <p class="card-text">Designed PCB and control systems for an R2-D2 style droid.</p>
+            <a href="https://github.com/yourusername/astromech" class="btn btn-primary" target="_blank">View Project</a>
+          </div>
+        </div>
+      </div>
+      <!-- Repeat for other robotics projects -->
+    </div>
+  </div>
+</section>
+
+<!-- Graphics/Gaming Section -->
+<section id="graphics" class="bg-light">
+  <div class="container">
+    <h2 class="text-center">Graphics & Gaming Projects</h2>
+    <div class="row mt-4">
+      <!-- Example project -->
+      <div class="col-md-4">
+        <div class="card project-card">
+          <img src="game1.jpg" class="card-img-top" alt="Project 1">
+          <div class="card-body">
+            <h5 class="card-title">2D Puzzle Platformer</h5>
+            <p class="card-text">Built in Lua/LÖVE2D with collision physics and custom shaders.</p>
+            <a href="https://github.com/yourusername/gameproject" class="btn btn-primary" target="_blank">View Project</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NN/ML Section -->
+<section id="ml">
+  <div class="container">
+    <h2 class="text-center">Neural Networks & Machine Learning</h2>
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <div class="card project-card">
+          <img src="ml1.jpg" class="card-img-top" alt="Project 1">
+          <div class="card-body">
+            <h5 class="card-title">Image Classification CNN</h5>
+            <p class="card-text">Trained a convolutional network for image recognition tasks.</p>
+            <a href="https://github.com/yourusername/mlproject" class="btn btn-primary" target="_blank">View Project</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3">
+  <p>© 2025 Christopher Wu | <a href="https://github.com/yourusername" class="text-white">GitHub</a></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
