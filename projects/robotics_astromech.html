@@ -17,22 +17,120 @@
 <section class="container py-5">
   <h1>Astromech Droid Controller</h1>
   <img src="../images/robotics_astromech.jpg" class="img-fluid my-4" alt="Astromech Droid">
-  <p>This project involved designing and building the main controller board for an Astromech droid, integrating multiple subsystems such as power management, motor control, and telemetry.</p>
 
-  <h3>Technologies Used</h3>
+  <p>
+    The Astromech Droid Controller project involved the <b>design, assembly, and integration</b> of a custom controller for the Cal Poly Robotics Club's Astromech unit. My work focused on <b>enclosure design, codebase integration, and PCB collaboration</b>, working closely with our client and professor.
+  </p>
+
+  <h3>Project Overview</h3>
   <ul>
-    <li>ESP32-S3 Microcontroller</li>
-    <li>PCB design with KiCad</li>
-    <li>I2C, UART, and PWM interfaces</li>
-    <li>Custom firmware in C/C++</li>
+    <li>Designed a robust main controller board integrating power, motor, and telemetry subsystems.</li>
+    <li>Led the enclosure design process, ensuring functional, user-friendly housing and easy maintenance.</li>
+    <li>Integrated legacy code for motor decoders and RC interface on ESP32 using C++.</li>
+    <li>Collaborated on PCB schematic/layout decisions with attention to expansion capability.</li>
   </ul>
 
-  <h3>Challenges & Solutions</h3>
-  <p>One of the main challenges was ensuring fault tolerance for motor drivers; this was solved by implementing current sensing and auto-shutdown protocols.</p>
+  <!-- PCB DESIGN SECTION -->
+  <h3>PCB Design Highlights</h3>
+  <ul>
+    <li>Custom ESP32-S3-based PCB designed in KiCad for minimal size and vibration resistance.</li>
+    <li>Key features:
+      <ul>
+        <li>Onboard 3.3V/5V regulators, fuses, and bypass jumpers</li>
+        <li>All ESP32 pins exposed for future expansion</li>
+        <li>I2C, UART, PWM, ADC, IO expander, quadrature decoder, and screen/Dpad connectivity</li>
+        <li>Robust connectors, terminal blocks, and mounting holes</li>
+        <li>Strategic USB-C port alignment for accessible enclosure mounting</li>
+      </ul>
+    </li>
+    <li>
+      <img src="../images/pcb_top_view.jpg" class="img-fluid my-2" alt="PCB Top View">
+      <figcaption>Figure: Final PCB Top View</figcaption>
+    </li>
+  </ul>
 
-  <h3>Links</h3>
+  <!-- ENCLOSURE DESIGN SECTION -->
+  <h3>Enclosure Design Process</h3>
+  <ul>
+    <li>Designed iteratively in OnShape with regular client feedback</li>
+    <li>Optimized internal fit for PCB, screen, connectors, and cable management</li>
+    <li>
+      Features:
+      <ul>
+        <li>Mounting pillars for RC receiver and PCB</li>
+        <li>Dedicated screen mount, cable management, and LED/connector accommodations</li>
+        <li>External tabs for integration into the robot chassis</li>
+      </ul>
+    </li>
+    <li>
+      <img src="../images/enclosure_final_cad.jpg" class="img-fluid mb-2" alt="Final Enclosure CAD">
+      <figcaption>Figure: Final Enclosure CAD Design</figcaption>
+    </li>
+  </ul>
+  <p><b>My contribution:</b> I led the enclosure design, collaborating closely with our professor and iterating based on feedback to meet all functional and space requirements.</p>
+
+  <!-- SOFTWARE OVERVIEW SECTION -->
+  <h3>Software Overview</h3>
+  <ul>
+    <li>Object-oriented, modular code in Arduino/C++, compatible with legacy Astromech systems</li>
+    <li>SBUS protocol processing for RC input (16 channels, robust failsafes and lost-frame handling)</li>
+    <li>Custom classes:
+      <ul>
+        <li><b>Motor_pwm_control:</b> Converts SBUS values to PWM for motors, including acceleration smoothing and signal inversion</li>
+        <li><b>ServoControl:</b> Smooth dome and servo behavior with failsafes</li>
+        <li><b>ScreenManager:</b> Real-time display of system/channel status and error indications</li>
+      </ul>
+    </li>
+    <li>Source code available:
+      <a href="https://github.com/yourusername/astromech" target="_blank" class="btn btn-primary btn-sm">View Source Code</a>
+    </li>
+  </ul>
+
+  <!-- HARDWARE AND INTEGRATION -->
+  <h3>Hardware Integration</h3>
+  <ul>
+    <li>Rigorous connector specification, assembly, and testing (color-coded wiring, terminal blocks, electrical safety)</li>
+    <li>Custom crimped screen connections for robustness</li>
+    <li>PCB hardware inverter for SBUS UART compatibility</li>
+    <li>
+      <img src="../images/connector_wiring_layout.jpg" class="img-fluid my-2" alt="Connector Wiring">
+      <figcaption>Figure: Connector Wiring Diagram</figcaption>
+    </li>
+  </ul>
+
+  <!-- CHALLENGES & SOLUTIONS -->
+  <h3>Challenges & Solutions</h3>
+  <ul>
+    <li>
+      <b>Motor driver fault tolerance:</b> Current sensing and auto-shutdown protocols
+    </li>
+    <li>
+      <b>SBUS implementation:</b> Memory optimization via Arduino partition tuning
+    </li>
+    <li>
+      <b>Legacy code integration:</b> Adapted motor/RC logic to ESP32; addressed channel mapping and interrupts
+    </li>
+    <li>
+      <b>Mechanical fit:</b> Iterative enclosure redesign for usability and cable routing as per feedback
+    </li>
+    <li>
+      <b>Failsafes:</b> Immediate neutral/center response on signal loss to prevent erratic robot behavior
+    </li>
+  </ul>
+
+  <!-- PERSONAL CONTRIBUTION -->
+  <h3>My Role</h3>
+  <ul>
+    <li>Led enclosure CAD development and client interactions in OnShape</li>
+    <li>Collaborated on PCB layout decisions (component placement, USB access, test fit)</li>
+    <li>Integrated legacy C++ control logic and debugged channel/interrupt management on ESP</li>
+    <li>Documented testing results, maintained GitHub project updates</li>
+  </ul>
+
+  <!-- END -->
+  <h3>Additional Materials</h3>
   <p>
-    <a href="https://github.com/yourusername/astromech" target="_blank" class="btn btn-primary">View Source Code</a>
+    <a href="../downloads/final_report.pdf" class="btn btn-secondary btn-sm" target="_blank">Download Final Report</a>
   </p>
 </section>
 
