@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Autonomous Object Tracking & Obstacle Avoidance – Gobilda Robot</title>
+  <link href="../style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">← Back to Portfolio</a>
+  </div>
+</nav>
+
+<section class="container py-5">
+  <h1>Autonomous Object Tracking and Obstacle Avoidance on a Gobilda Robot</h1>
+  <img src="../images/gobilda_robot.jpg" class="img-fluid my-4" alt="Gobilda Robot Setup">
+
+  <h2>Abstract</h2>
+  <p>
+    This project developed an autonomous control system for a Gobilda robot equipped with an <b>OAK-D Pro camera</b> and <b>RPLIDAR A1 sensor</b>. It uses a <b>finite state machine (FSM)</b> approach to allow the robot to track people while avoiding obstacles. The system integrates computer vision and LiDAR for real-time navigation using <b>ROS2</b> middleware. The robot demonstrates smooth behavioral transitions and performance suitable for dynamic environments, validating its capability for applications requiring both environment awareness and target following.
+  </p>
+
+  <h2>Introduction</h2>
+  <ul>
+    <li>Combines person/object detection with obstacle avoidance.</li>
+    <li>Uses OAK-D Pro spatial AI camera, RPLIDAR A1 2D lidar, and NVIDIA Jetson Nano Orin running ROS2.</li>
+    <li>FSM manages transitions between tracking and avoidance based on sensor input.</li>
+    <li>Main goal: Reliable, seamless behavior switching between following a tracked object and safely navigating obstacles.</li>
+  </ul>
+
+  <h2>Software Architecture</h2>
+  <p>
+    Built on ROS2 and a node-based structure, the <b>Object Tracking Node</b> subscribes to:
+    <ul>
+      <li>/oak/nn/spatial_detections (camera object detections)</li>
+      <li>/scan (LiDAR data)</li>
+      <li>/oak/imu/data (IMU; not used in final implementation)</li>
+    </ul>
+    Velocity commands are published to <code>cmd_vel</code>.
+    <br>
+    Neural Network: <b>MobileNet-SSD</b> selected for fast and reliable person detection.
+  </p>
+  <img src="../images/ros2_node_architecture.jpg" class="img-fluid mb-3" alt="ROS2 Node Diagram">
+  <figcaption>Figure 1: ROS2 Node Architecture</figcaption>
+
+  <h2>Finite State Machine Design</h2>
+  <ul>
+    <li><b>Check LiDAR</b> – Prioritizes obstacle detection.</li>
+    <li><b>Check Detection</b> – Processes camera data for targeting.</li>
+    <li><b>Follow Object</b> – Proportional control tracking a detected person.</li>
+    <li><b>Stop Following</b> – Halts when close to target.</li>
+    <li><b>Roomba Move Forward</b> – Default exploration when no detections.</li>
+    <li><b>Roomba Backup</b> – Reverse movement in response to nearby obstacles.</li>
+    <li><b>Roomba Spin</b> – Rotational search after backup.</li>
+    <li><b>Roomba Recovery</b> – Default safety when sensor data unavailable.</li>
+  </ul>
+  <img src="../images/fsm_diagram.jpg" class="img-fluid mb-3" alt="Finite State Machine Diagram">
+  <figcaption>Figure 2: Finite State Machine Diagram</figcaption>
+
+  <h2>Implementation Details</h2>
+  <h4>Object Detection & Tracking</h4>
+  <p>
+    The camera uses MobileNet-SSD for real-time person detection. Upon detection, positional data (x, y, z) is extracted and processed to determine proximity and direction relative to the robot.
+  </p>
+  <img src="../images/object_detection_overlay.jpg" class="img-fluid mb-3" alt="Object Detection Overlay">
+  <figcaption>Figure 3: MobileNet Detection Overlay</figcaption>
+
+  <h4>Obstacle Avoidance</h4>
+  <p>
+    LiDAR data (ranges 340–800) monitors the area ahead. Obstacles within 0.6 m trigger avoidance states. If no LiDAR data, the robot enters recovery.
+  </p>
+
+  <h4>Motion Control</h4>
+  <p>
+    Proportional control adjusts linear and angular velocities based on the detected target’s vector position. Separate gains are used for right and left turns to counteract hardware asymmetry. The logic reduces speed as the robot approaches its target to minimize oscillations for smooth tracking.
+  </p>
+
+  <h2>Challenges & Solutions</h2>
+  <ul>
+    <li>
+      <b>State Machine Complexity:</b> Race conditions mitigated by clear priorities—obstacle avoidance always overrides tracking.
+    </li>
+    <li>
+      <b>Detection Reliability:</b> MobileNet-SSD tuned for confidence and robustness; fallback behaviors included.
+    </li>
+    <li>
+      <b>Velocity Tuning:</b> Different proportional gains and normalization improve smoothness.
+    </li>
+    <li>
+      <b>Camera Configuration:</b> Overcame documentation gaps with extensive testing and use of Foxglove for debugging.
+    </li>
+    <li>
+      <b>Integration:</b> Ensured states set explicit velocities before transitions to avoid unsafe stops or direction changes.
+    </li>
+  </ul>
+
+  <h2>Demonstration Results</h2>
+  <ul>
+    <li>Showed consistent person following at distances >1 m.</li>
+    <li>Reliable, safe obstacle avoidance within LiDAR range (~0.6 m).</li>
+    <li>Quick, correct state transitions validated FSM design and safety prioritization strategy.</li>
+    <li>See demo: <a href="https://www.youtube.com/watch?v=O9Lxj0admPE" target="_blank" class="btn btn-primary btn-sm">Watch Video Demo</a></li>
+  </ul>
+
+  <h2>Future Improvements</h2>
+  <ul>
+    <li>Experiment with additional neural network models or custom training for more robust detection.</li>
+    <li>Investigate object tracking filters available in DepthAI ROS for improved performance.</li>
+    <li>Integrate localization by fusing IMU and odometry data for advanced navigation tasks.</li>
+    <li>Explore advanced object tracking and following algorithms to handle occlusions and quick movements.</li>
+  </ul>
+
+  <h2>Conclusion</h2>
+  <p>
+    This project validated a multi-modal sensor fusion approach for real-time autonomous object tracking and obstacle avoidance, leveraging effective state logic and proportional control to reliably navigate dynamic environments.
+  </p>
+  <hr>
+  <h3>References</h3>
+  <ul>
+    <li>Luxonis. "DepthAI ROS Driver."</li>
+    <li>Luxonis. "depthai-ros." GitHub repository.</li>
+    <li>[Add other relevant citations or links as appropriate]</li>
+  </ul>
+</section>
+
+</body>
+</html>

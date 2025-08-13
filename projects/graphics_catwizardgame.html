@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cat Wizard Procedural Library Game – Portfolio Entry</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 1100px; margin: auto; padding: 20px; background: #fafafa; color: #333; }
+        h1, h2, h3 { color: #2c3e50; }
+        ul { margin-left: 20px; }
+        code { background-color: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
+        .section { margin-bottom: 40px; }
+        .resume-entry { background: #fff; border: 1px solid #ddd; padding: 20px; border-radius: 8px; }
+
+        /* Gallery styling */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+            gap: 15px;
+        }
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .gallery figcaption {
+            font-size: 0.9em;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        /* Video embed styling */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .video-container iframe,
+        .video-container video {
+            position: absolute;
+            top:0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Cat Wizard Procedural Library Game</h1>
+        <p><em>Custom C++/OpenGL Real-Time Game Engine Project</em></p>
+    </header>
+
+    <section class="section">
+        <h2>Project Summary</h2>
+        <p>
+            Built a real-time 3D game engine from scratch in C++/OpenGL featuring a cat wizard exploring a procedurally generated magical library, collecting keys and spells to unlock the boss room and defeat a multi-phase boss. Engine includes advanced rendering, physics/collision, audio, and gameplay systems.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>Technical Overview</h2>
+        <p>
+            This project was developed from scratch in <strong>C++</strong> using <strong>OpenGL</strong> for rendering, with no pre-built game engines.
+            It includes an entirely custom real-time rendering pipeline, interactive gameplay systems, procedural content generation,
+            and performance-focused optimizations.
+        </p>
+        <ul>
+            <li><strong>Engine Architecture:</strong> Modular C++ code structure with systems for rendering, physics/collision, audio, and gameplay loop management.</li>
+            <li><strong>Rendering Pipeline:</strong> High-resolution <em>shadow mapping</em>, <em>deferred rendering</em> with G-buffers, post-processing filters, instanced rendering, and dynamic lighting.</li>
+            <li><strong>Procedural Generation:</strong> Library and boss room layouts generated algorithmically; spawn logic for enemies, keys, and spell collectibles; room connectivity rules enforced.</li>
+            <li><strong>Collision & Physics:</strong> Custom QuadTree spatial partitioning for environment/interaction optimization; occlusion-query-based camera collision/adjustment logic.</li>
+            <li><strong>AI Systems:</strong> Boss AI with multi-phase behaviors, projectile usage, AOE slam attacks, and minion summoning; per-enemy AI patterns.</li>
+            <li><strong>Animations & Models:</strong> FBX skeletal animation system, interactive world objects (doors, books), and Assimp-based model loading.</li>
+            <li><strong>Audio:</strong> MiniAudio integration for music, ambient sound, and event-triggered sound effects tied to gameplay events.</li>
+            <li><strong>Performance Optimizations:</strong> Frustum culling, instancing, spatial queries, and asset pooling to handle large procedurally generated levels efficiently.</li>
+        </ul>
+    </section>
+
+
+    <section class="section">
+        <h2>Gallery</h2>
+        <div class="gallery">
+            <figure>
+                <img src="images/screenshot1.jpg" alt="Procedurally generated library environment">
+                <figcaption>Procedurally generated library</figcaption>
+            </figure>
+            <figure>
+                <img src="images/screenshot2.jpg" alt="Boss battle sequence">
+                <figcaption>Boss battle sequence</figcaption>
+            </figure>
+            <figure>
+                <img src="images/screenshot3.jpg" alt="Spell casting visuals">
+                <figcaption>Spell casting effect</figcaption>
+            </figure>
+        </div>
+        <p style="font-size:0.9em; color:#666;">(Replace image paths with your actual screenshots.)</p>
+    </section>
+
+    <section class="section">
+        <h2>Gameplay Video</h2>
+        <div class="video-container">
+            <!-- Embed YouTube video -->
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE"
+                    title="Gameplay Video"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            <!-- OR for local video:
+            <video controls>
+                <source src="videos/gameplay.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            -->
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Key Contributions</h2>
+        <h3>Game Engine Systems</h3>
+        <ul>
+            <li><strong>Procedural Level Generation:</strong> Designed and implemented library & boss room generation algorithms with scalable parameters, logical connectivity, and gameplay object placement.</li>
+            <li><strong>Custom QuadTree Collision System:</strong> Optimized spatial queries for player, camera, projectiles, and interactable objects.</li>
+            <li><strong>Camera Occlusion via Depth Queries:</strong> Smooth third-person camera adjustments using OpenGL occlusion queries to prevent clipping.</li>
+        </ul>
+        <!-- ... other contribution lists here -->
+    </section>
+
+
+    <section class="section resume-entry">
+        <h2>Example Résumé Entry</h2>
+        <p><strong>Gameplay & Engine Programmer – Procedural 3D Cat Wizard Game Engine</strong></p>
+        <ul>
+            <li>Designed procedural library & boss room generators linked with progression systems.</li>
+            <li>Implemented custom QuadTree collision system for efficient spatial lookups.</li>
+            <li>Developed camera occlusion handling with OpenGL depth queries for smooth third-person view.</li>
+            <li>Created multi-phase boss combat with AI, minion spawning, projectile mechanics, and phase transitions.</li>
+            <li>Integrated advanced rendering pipeline: shadow mapping, deferred shading, instancing, and post-processing.</li>
+        </ul>
+    </section>
+</body>
+</html>
