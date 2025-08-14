@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Audio Transcription & Sheet Music Tool - Christopher Wu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">Christopher Wu</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="../index.html#robotics">Robotics</a></li>
+        <li class="nav-item"><a class="nav-link" href="../index.html#graphics">Graphics/Gaming</a></li>
+        <li class="nav-item"><a class="nav-link" href="../index.html#ml">NN / ML</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="bg-primary text-white text-center" style="padding:80px 0;">
+  <div class="container">
+    <h1>Audio Transcription & Sheet Music Generation Tool</h1>
+    <p class="lead">Machine Learning • Music Information Retrieval • Python Tools</p>
+  </div>
+</header>
+
+<!-- Project Overview -->
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <h2>Project Summary</h2>
+        <p>
+          This desktop application converts multi‑instrument audio into clean, printable sheet music.
+          It integrates <strong>Magenta’s Onsets and Frames</strong> and <strong>DrumRNN</strong> transcription models with
+          <strong>Spleeter</strong> for source separation, <strong>pretty_midi</strong> for quantization, and <strong>MuseScore</strong> for score generation.
+          Users can separate stems (e.g., piano, drums), transcribe them into MIDI, and export quantized scores
+          — all through an accessible <strong>tkinter-based GUI</strong> with drag‑and‑drop support.
+        </p>
+        <p>
+          Developed as my Computer Engineering senior project at Cal Poly SLO,
+          the tool is designed for musicians, educators, and developers interested in AI-assisted music transcription.
+        </p>
+      </div>
+      <div class="col-lg-4">
+        <img src="../images/ml_audio_transcriber.jpg" class="img-fluid rounded shadow" alt="Project GUI Screenshot">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- System Design -->
+<section class="bg-light py-5">
+  <div class="container">
+    <h2>System Design & Workflow</h2>
+    <ol>
+      <li>Audio Import & Conversion — Supports MP3, WAV, FLAC. Converts to 16kHz mono WAV using ffmpeg for model compatibility.</li>
+      <li>Source Separation — Uses <strong>Spleeter</strong> to split into five stems: vocals, piano, drums, bass, other.</li>
+      <li>Transcription — Passes selected stems into <strong>Magenta’s Onsets and Frames</strong> (piano) or <strong>DrumRNN</strong> (drums).</li>
+      <li>Quantization — Uses <strong>pretty_midi</strong> to simplify rhythms and improve sheet readability.</li>
+      <li>Sheet Music Generation — Calls <strong>MuseScore CLI</strong> to produce PDF sheet music from MIDI.</li>
+    </ol>
+    <p>
+      The GUI supports running each step independently, enabling iterative workflows — for example, retrying transcription with different stems without repeating earlier steps.
+    </p>
+  </div>
+</section>
+
+<!-- Technical Challenges -->
+<section class="py-5">
+  <div class="container">
+    <h2>Implementation Challenges & Solutions</h2>
+    <ul>
+      <li><strong>Dependency Conflicts</strong> — Managed with isolated Conda environments for TensorFlow, librosa, and Spleeter compatibility.</li>
+      <li><strong>Guitar Transcription Limitations</strong> — Trained a custom Onsets and Frames model on GuitarSet dataset; results were poor, reinforcing the need for better datasets.</li>
+      <li><strong>Score Readability</strong> — Quantization reduced unique rhythmic values, improving clarity without major loss of musical detail.</li>
+      <li><strong>MusicXML Workflow Issues</strong> — Direct post-processing in music21 caused layout issues; settled on quantized MIDI → MuseScore for consistency.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Results -->
+<section class="bg-light py-5">
+  <div class="container">
+    <h2>Results & Evaluation</h2>
+    <p>
+      Testing on piano-heavy tracks such as "Don’t Stop Believin’" demonstrated strong rhythmic accuracy and pitch detection when stems were cleanly separated.
+      Quantization consistently reduced rhythmic complexity (e.g., unique durations), leading to more readable scores.
+    </p>
+    <p>
+      Drum transcription was moderately accurate for basic patterns but less reliable for cymbals and hi‑hats. Guitar transcription still requires improvement.
+    </p>
+    <img src="../images/dsb_sheetmusic_sample.jpg" class="img-fluid rounded shadow" alt="Example quantized sheet music output">
+  </div>
+</section>
+
+<!-- Future Work -->
+<section class="py-5">
+  <div class="container">
+    <h2>Future Improvements</h2>
+    <ul>
+      <li>Support for more instruments (bass, vocals) via new or fine‑tuned models.</li>
+      <li>Batch processing and real-time audio transcription.</li>
+      <li>Chord symbol overlay and automatic key detection.</li>
+      <li>Standalone .exe packaging for easier installation.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- GitHub Link -->
+<section class="bg-primary text-white py-5">
+  <div class="container text-center">
+    <h2>Explore the Project</h2>
+    <p>Source code, setup instructions, and example sheet music are available on GitHub.</p>
+    <a href="https://github.com/SpyMonkie/ai-music-transcription-project" target="_blank" class="btn btn-light">View on GitHub</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3">
+  <p>© 2025 Christopher Wu | <a href="https://github.com/SpyMonkie" class="text-white">GitHub</a></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
