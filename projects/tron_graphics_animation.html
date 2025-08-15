@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRON OpenGL Animation - Christopher Wu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #00FFFF;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background-color: rgba(0, 255, 255, 0.1);
+        }
+        h1, h2, h3, h4 {
+            color: #00FFFF;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .section {
+            margin-bottom: 40px;
+            text-align: left;
+            width: 100%;
+        }
+        .images {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        img {
+            max-width: 300px;
+            height: auto;
+            border: 2px solid #00FFFF;
+        }
+        iframe {
+            border: 2px solid #00FFFF;
+            max-width: 100%;
+        }
+        a {
+            color: #FF8C00;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #FFA500;
+        }
+        ul {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>TRON Animation</h1>
+            <h4>By Christopher Wu</h4>
+            <p>CSC471 - Winter 2025</p>
+        </div>
+        <div class="content">
+            <div class ="section">
+                <h2>About</h2>
+            </div>
+            <div class="images">
+                <iframe width="560" height="314" src="https://www.youtube.com/embed/obEuWqP2x-s" title="CSC471 - Winter 2025 Final Project" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="section">
+                <h3>Technologies Used</h3>
+                <ul>
+                    <li>Skinned mesh animation (for the stick figure)</li>
+                    <li>Assimp for model loading</li>
+                    <li>Spline-based animation for camera and light cycles</li>
+                    <li>Light trail implementation using glBufferSubData()</li>
+                    <li>Shader programs for derezolution and lighting</li>
+                    <li>Skybox implementation</li>
+                </ul>
+            </div>
+            <div class="section">
+                <h2>Further Explanation</h2>
+                <p>For my final project, I wanted to create an animation that was inspired by Tron and this <a href="https://youtu.be/mIDlU_sKto0?si=q54xe4MxYWmAwkaK" target="_blank" rel="noopener noreferrer">video</a>, which is a compilation of the top 100 submissions to the online Endless Engines 3D render challenge.</p>
+                <p>The scene starts with the view looking at a gaming bedroom. When a specific key is pressed to start the first animation, there is a model of a person that is rigged, loaded, and animated with Assimp. The person will start to run to the computer desktop and will jump into the screen, which will then rotate the view and move it into the screen which will trigger the next scene.</p>
+            </div>
+            <div class="images">
+                <img src="../images/graphics_2/into_screen.png" alt="Into Screen">
+                <img src="../images/graphics_2/start.png" alt="Start">
+            </div>
+            <div class="section">
+                <p>In this next scene, the camera will be looking at a model of a person on a tron cycle. When the next specific key is pressed, it will also start another animation. The animation is centered around a chase between the orange tron cycle and the blue tron cycle. For animating the positions of the tron cycle and the camera, I used multiple spline bezier curves, which made defining segments of the animation a little easier to control. Additionally, I animated the moving direction of each cycle which will always be pointing in the next position defined in the interpolation of the spline bezier curves. This gives the models the ability to be animated in the correct direction of travel to have a more natural motion. I also implemented a leaning feature for the tron cycles during some parts of the animation, especially when they move side to side or when the blue and orange cycles are against each other.</p>
+            </div>
+            <div class="images">
+                <img src="../images/graphics_2/beginning_tron.png" alt="Beginning Tron">
+                <img src="../images/graphics_2/tron_start.png" alt="Tron Start">
+                <img src="../images/graphics_2/leaning.png" alt="Leaning">
+            </div>
+            <div class="section">
+                <p>For the light trails, I initially tried to use particles that would continuously shoot out from the back of the tron cycles, but the animation kept freezing with the particles. So, I found another way to implement the light cycles, which involved manually defining a rectangular object and using glBufferSubData() to continually extend the trail. I also added a feature in this implementation of the light trail to calculate the direction if the trail/tron cycle ever moves in a different direction.</p>
+                <p>If you have never seen tron before, basically when light beam from the cycle is collided with something that has light, in this case the orange cycle and the blue light trail, the object will be "deleted" or what they call as "derez".</p>
+                <p>So, close to the end of the tron animation, at some point, the blue tron cycle will get ahead of the orange tron cycle and cause the orange tron cycle to collide with the blue trail. My collision detection is simple in this case since I did the animation in parts due to the bezier curves. So all I check is whether the orange tron cycle's max bounding box position is in range of the defined point I planned out with the bezier curves.</p>
+                <p>After this collision, the orange tron cycle will start to be "derezed". For the derezolution of the orange tron cycle after hitting the blue trail, I start to discard some of the colors of the orange tron cycle in the fragment shader, until they are eventually all gone.</p>
+            </div>
+            <div class="images">
+                <img src="../images/graphics_2/derez.png" alt="Derez">
+            </div>
+            <div class="section">
+                <p>After the "derez" of the orange cycle, I tried to pay homage to the "<a href="https://youtu.be/A9hCzjBc7Q4?si=zms-CGEcpG88flBV" target="_blank" rel="noopener noreferrer">Akira slide</a>" by having the blue tron cycle stop its movement by reenacting the slide, which would signal the end of the whole tron animation.</p>
+            </div>
+            <div class="images">
+                <img src="../images/graphics_2/akira_slide.png" alt="Akira Slide">
+            </div>
+            <div class="section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="https://learnopengl.com/" target="_blank" rel="noopener noreferrer">learnopengl.com</a> - Followed their Assimp tutorial</li>
+                    <li><a href="https://www.assimp.org/" target="_blank" rel="noopener noreferrer">Assimp</a> - Was less difficult to implement thanks to the learnopengl tutorial</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
