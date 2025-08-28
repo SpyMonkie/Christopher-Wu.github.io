@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Classic Tetris Game (Lua) - Christopher Wu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">Christopher Wu</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="../index.html#robotics">Robotics</a></li>
+        <li class="nav-item"><a class="nav-link" href="../index.html#graphics">Graphics/Gaming</a></li>
+        <li class="nav-item"><a class="nav-link" href="../index.html#ml">NN / ML</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Header -->
+<header class="bg-secondary text-white text-center" style="padding:80px 0;">
+  <div class="container">
+    <h1>Classic Tetris in Lua</h1>
+    <p class="lead">Grid-based Falling Blocks Game • LOVE 2D Engine</p>
+  </div>
+</header>
+
+<!-- Project Overview -->
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <h2>Project Overview</h2>
+        <p>
+          I developed a classic <strong>Tetris-style falling blocks game</strong> in Lua, using the <strong>LOVE 2D game engine</strong>.
+          The gameplay includes increasing difficulty with level selection, accurate scoring, line clearing, and real-time piece rotation and movement. A custom grid system tracks every block’s position and supports all traditional Tetris shapes.
+        </p>
+        <p>
+          The user interface features a start and settings menu, level selector, persistent top scores for each level, and live display of the next block.
+          The project demonstrates structured Lua code for grid management, collision detection, input handling, and modular game state.
+        </p>
+      </div>
+      <div class="col-lg-4 text-center">
+        <img src="../images/tetris_menu.png" class="img-fluid rounded shadow mb-3" alt="Tetris Lua Menu Screenshot">
+        <img src="../images/tetris_play.png" class="img-fluid rounded shadow" alt="Tetris Lua Gameplay Screenshot">
+        <p class="mt-2"><em>Menu and gameplay screens from my Lua Tetris implementation.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="bg-light py-5">
+  <div class="container">
+    <h2>Main Features</h2>
+    <ul>
+      <li>Seven authentic Tetris block types (<strong>I, O, T, L, J, S, Z</strong>), each with custom rotation logic.</li>
+      <li>Per-level gravity speeds and scoring multipliers.</li>
+      <li>Full support for line clearing, scoring, and level-up system.</li>
+      <li>Game states: start screen, settings/level select, gameplay, pause, and game over.</li>
+      <li>Live top scores storage and display for each level.</li>
+      <li>Key input for piece movement (left, right, down), rotation (A/D), restart, and menu navigation.</li>
+      <li>Visual preview of upcoming block type/color.</li>
+      <li>Modular code: separate Lua files for grid management, scoring, and block handling.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Sample Code -->
+<section class="py-5">
+  <div class="container">
+    <h2>Sample Code Highlights</h2>
+    <pre class="bg-light p-3 rounded"><code>-- Detect and handle line clearing
+for y = 1, grid.height do
+  if grid:checkRowFull(y) then
+    grid:clearRow(y)
+    calcScore(lines_cleared)
+    determineLevel(LINES_CLEARED)
+  end
+end
+
+-- Piece movement and rotation
+if key == "left" then
+  DIRECTION = DIRECTIONS.LEFT
+  if not checkWallCollision() and not checkHorizontalCollision() then
+    Xvalue = Xvalue - 1
+  end
+elseif scancode == "a" then
+  ROTATION_DIR = ROTATION.COUNTERCLOCKWISE
+  if canRotate() then rotateShape() end
+end
+</code></pre>
+  </div>
+</section>
+
+<!-- Future Improvements -->
+<section class="bg-light py-5">
+  <div class="container">
+    <h2>Possible Future Improvements</h2>
+    <ul>
+      <li>Add hard drop and “ghost piece” preview mechanics.</li>
+      <li>Sound effects and music integration.</li>
+      <li>Save/load top scores to disk for persistence.</li>
+      <li>Gamepad input support and touch control.</li>
+      <li>Add more dynamic visual effects for block placement and line clears.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- GitHub Link -->
+<!-- <section class="bg-dark text-white text-center py-5">
+  <div class="container">
+    <h2>Source Code</h2>
+    <p>The complete Lua project is available for review and modification.</p>
+    <a href="https://github.com/yourusername/lua-tetris" class="btn btn-secondary" target="_blank">View on GitHub</a>
+  </div>
+</section> -->
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3">
+  <p>© 2025 Christopher Wu | <a href="https://github.com/SpyMonkie" class="text-white">GitHub</a></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
